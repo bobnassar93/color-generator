@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Color Generator</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header slot="fixed" [translucent]="true">
+  <ion-toolbar mode="md">
+    <ion-title>
+      <ion-label style="vertical-align: middle;">rgba({{ r }}, {{ g }}, {{ b }}, {{ a | number }})</ion-label>
+      <ion-button fill="clear" color="dark" style="vertical-align: middle;" (click)="copyToClipboard()">
+        <ion-icon name="copy-outline"></ion-icon>
+      </ion-button>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" style="--background: rgba({{r}}, {{g}}, {{b}}, {{a}})">
+
+</ion-content>
+
+<ion-footer id="footer">
+  <ion-button (click)="expandCollapseContainer()" class="expand-collapse-btn">
+    <ion-icon slot="icon-only" name="{{icon}}"></ion-icon>
+  </ion-button>
+  <ion-range min="0" max="255" step="1" color="danger" pin="true" [(ngModel)]="r"></ion-range>
+  <ion-range min="0" max="255" step="1" color="success" pin="true" [(ngModel)]="g"></ion-range>
+  <ion-range min="0" max="255" step="1" color="primary" pin="true" [(ngModel)]="b"></ion-range>
+  <ion-range min="0" max="1" step="0.01" color="dark" [(ngModel)]="a"></ion-range>
+</ion-footer>
