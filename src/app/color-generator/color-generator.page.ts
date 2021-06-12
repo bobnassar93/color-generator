@@ -42,19 +42,12 @@ export class ColorGeneratorPage implements OnInit {
       this.isExpended = true;
       this.icon = 'chevron-down';
       footer.style.height = '178px';
-      //footer.style.removeProperty('height');
     }
   }
 
-  public copyToClipboard(): void {
-    const listener = (e: ClipboardEvent) => {
-      e.clipboardData.setData('text/plain', `rgba(${this.r},${this.g},${this.b}, ${this.a})`);
-      e.preventDefault();
-      document.removeEventListener('copy', listener);
-
+  async copyToClipboard(): Promise<void> {
+    await navigator.clipboard.writeText(`rgba(${this.r},${this.g},${this.b}, ${this.a})`).then(()=>{
       this.presentToast();
-    };
-    document.addEventListener('copy', listener);
-    document.execCommand('copy');
+    });
   }
 }
