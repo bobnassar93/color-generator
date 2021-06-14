@@ -99,7 +99,5 @@ export class ColorGeneratorPage implements OnInit {
     this.r = Math.floor(Math.random() * 256);
     this.g = Math.floor(Math.random() * 256);
     this.b = Math.floor(Math.random() * 256);
-
-    this.copyToClipboard();
   }
 }

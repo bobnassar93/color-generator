@@ -5,6 +5,10 @@ ion-footer {
   transition: ease-out 0.5s;
 }
 
+ion-input{
+  --padding-end: 10px;
+}
+
 ion-content{
   transition: ease-out 0.5s;
 }
