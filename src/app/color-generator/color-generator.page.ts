@@ -7,22 +7,24 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./color-generator.page.scss'],
 })
 export class ColorGeneratorPage implements OnInit {
-  folder: string;
-  r = 127;
-  g = 127;
-  b = 127;
+
+  r = Math.floor(Math.random() * 256);
+  g = Math.floor(Math.random() * 256);
+  b = Math.floor(Math.random() * 256);
   a = 1;
   icon = 'chevron-down';
   isExpended = true;
 
-  constructor(public toastController: ToastController) { }
+  constructor(public toastController: ToastController) {
+  }
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Copied to clipbaord',
+      message: 'Color code copied to clipboard!',
       duration: 2000,
       animated: true,
-      color: 'light'
+      position: 'top',
+      color: 'dark'
     });
     toast.present();
   }
@@ -32,26 +34,20 @@ export class ColorGeneratorPage implements OnInit {
 
   expandCollapseContainer() {
     const footer = document.querySelector('ion-footer');
-    const headers = document.querySelectorAll('ion-header');
+    const header = document.querySelector('ion-header');
 
     if (this.isExpended === true) {
       this.isExpended = false;
       this.icon = 'chevron-up';
 
       footer.style.height = '0';
-
-      headers.forEach(header => {
-        header.style.top = '-200px';
-      });
+      header.style.top = `-${header.clientHeight}px`;
 
     } else {
       this.isExpended = true;
       this.icon = 'chevron-down';
       footer.style.height = '178px';
-
-      headers.forEach(header => {
-        header.style.top = '0';
-      });
+      header.style.top = '0';
     }
   }
 
@@ -62,44 +58,48 @@ export class ColorGeneratorPage implements OnInit {
   }
 
   checkNumberLimit(ev) {
+    const element = ev.target;
+    const value = Number(ev.target.value);
 
-    switch (ev.target.name) {
-      case 'r':
-        if (Number(ev.target.value) > 255) {
-          this.r = 255;
-          //ev.target.value = '255';
-        } else if (Number(ev.target.value) < 0) {
-          ev.target.value = 0;
-        }
-        break;
-      case 'g':
-        if (Number(ev.target.value) > 255) {
-          this.g = 255;
-          ev.target.value = 255;
-        } else if (Number(ev.target.value) < 0) {
-          ev.target.value = 0;
-        }
-        break;
-      case 'b':
-        if (Number(ev.target.value) > 255) {
-          this.b = 255;
-          ev.target.value = 255;
-        } else if (Number(ev.target.value) < 0) {
-          ev.target.value = 0;
-        }
-        break;
-      case 'a':
-        if (Number(ev.target.value) > 255) {
-          this.a = 255;
-          ev.target.value = 1;
-        } else if (Number(ev.target.value) < 0) {
-          ev.target.value = 0;
-        }
-        break;
-    }
+    setTimeout(() => {
+      switch (element.name) {
+        case 'r':
+          if (value > 255) {
+            this.r = 255;
+          } else if (value < 0) {
+            element.value = 0;
+          }
+          break;
+        case 'g':
+          if (value > 255) {
+            this.g = 255;
+          } else if (value < 0) {
+            element.value = 0;
+          }
+          break;
+        case 'b':
+          if (value > 255) {
+            this.b = 255;
+          } else if (value < 0) {
+            element.value = 0;
+          }
+          break;
+        case 'a':
+          if (value > 1) {
+            this.a = 1;
+          } else if (value < 0) {
+            element.value = 0;
+          }
+          break;
+      }
+    }, 150);
   }
 
-  setValue(element: HTMLInputElement, colorVar){
+  randomize() {
+    this.r = Math.floor(Math.random() * 256);
+    this.g = Math.floor(Math.random() * 256);
+    this.b = Math.floor(Math.random() * 256);
 
+    this.copyToClipboard();
   }
 }

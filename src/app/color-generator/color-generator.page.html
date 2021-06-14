@@ -5,20 +5,18 @@
     </ion-buttons>
     <ion-title>Color Generator</ion-title>
   </ion-toolbar>
-</ion-header>
-<ion-header slot="fixed" [translucent]="true">
   <ion-toolbar mode="md">
     <ion-buttons slot="start">
-      R
+      <ion-label color="danger">R</ion-label>
       <ion-input color="danger" type="number" placeholder="R" [(ngModel)]="r" min="0" max="255" maxlength="255" name="r"
-        (ionInput)="checkNumberLimit($event)"></ion-input>
-      G
+        (input)="checkNumberLimit($event)"></ion-input>
+        <ion-label color="success">G</ion-label>
       <ion-input color="success" type="number" placeholder="G" [(ngModel)]="g" min="0" max="255" name="g"
         (ionInput)="checkNumberLimit($event)"></ion-input>
-      B
+        <ion-label color="primary">B</ion-label>
       <ion-input color="primary" type="number" placeholder="B" [(ngModel)]="b" min="0" max="255" name="b"
         (ionInput)="checkNumberLimit($event)"></ion-input>
-      A
+        <ion-label color="medium">A</ion-label>
       <ion-input color="medium" type="number" placeholder="A" [(ngModel)]="a" min="0" max="1" name="a"
         (ionInput)="checkNumberLimit($event)"></ion-input>
 
@@ -26,15 +24,13 @@
         <ion-icon name="copy-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>
-
-      <!-- <ion-label style="vertical-align: middle;">rgba({{ r }}, {{ g }}, {{ b }}, {{ a | number }})</ion-label> -->
-
-    </ion-title>
+    <ion-button fill="clear" (click)="randomize()" slot="end" color="dark">
+      <ion-icon name="shuffle-outline" ></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" style="--background: rgba({{r}}, {{g}}, {{b}}, {{a}})">
+<ion-content [fullscreen]="true" style="--background: rgba({{r}}, {{g}}, {{b}}, {{a}}); opacity: {{a}};">
 
 </ion-content>
 

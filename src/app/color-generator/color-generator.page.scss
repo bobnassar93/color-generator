@@ -1,18 +1,21 @@
 ion-footer {
-  // text-align: center;
-  // position: absolute;
-  // left: 0;
-  // right: 0;
-  // bottom: 0;
   height: 178px;
   padding-top: 10px;
   background: #f4f5f8;
   transition: ease-out 0.5s;
 }
 
-ion-header{
+ion-content{
+  transition: ease-out 0.5s;
+}
+
+ion-toolbar {
+  --padding-start: 10px;
+}
+
+ion-header {
   top: 0;
-   transition: ease-out 0.5s;
+  transition: ease-out 0.5s;
 }
 
 .expand-collapse-btn {
@@ -47,4 +50,8 @@ ion-range {
   padding-top: 0;
   padding-bottom: 0;
   --knob-size: 20px;
+}
+
+ion-buttons {
+  font-weight: bold;
 }
