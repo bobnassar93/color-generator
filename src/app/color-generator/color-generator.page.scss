@@ -10,6 +10,11 @@ ion-footer {
   transition: ease-out 0.5s;
 }
 
+ion-header{
+  top: 0;
+   transition: ease-out 0.5s;
+}
+
 .expand-collapse-btn {
   height: 25px;
   position: absolute;
