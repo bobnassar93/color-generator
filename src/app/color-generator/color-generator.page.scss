@@ -6,8 +6,12 @@ ion-footer {
 }
 
 ion-input{
-  --padding-start: 3px;
+  --padding-start: 0;
   --padding-end: 0;
+  text-align: center;
+  background: rgb(0 0 0 / 5%);
+    border-radius: 5px;
+    margin-left: 5px;
 }
 
 ion-content{
@@ -15,7 +19,7 @@ ion-content{
 }
 
 ion-toolbar {
-  --padding-start: 7px;
+  --padding-start: 10px;
 }
 
 ion-header {
@@ -49,6 +53,10 @@ ion-header {
     --background: #1f1f1f;
     color: #f4f5f8;
   }
+
+  ion-input{
+    background: rgb(255 255 255 / 5%);
+  }
 }
 
 ion-range {
@@ -60,4 +68,10 @@ ion-range {
 ion-buttons {
   font-weight: bold;
   margin: 0;
+}
+
+.ios{
+  ion-buttons {
+    margin: 5px 0 5px 0;
+  }
 }

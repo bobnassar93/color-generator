@@ -7,19 +7,19 @@
   </ion-toolbar>
   <ion-toolbar style="border-top: solid 1px rgb(0 0 0 / 70%);">
     <ion-buttons slot="start">
-      <ion-label color="danger">R:</ion-label>
+      <!-- <ion-label color="danger">R:</ion-label> -->
       <ion-input color="danger" type="number" placeholder="R" [(ngModel)]="r" min="0" max="255" maxlength="255" name="r"
         (input)="checkInputLimit($event)"></ion-input>
 
-      <ion-label color="success" class="margin-left-5">G:</ion-label>
+      <!-- <ion-label color="success" class="margin-left-5">G:</ion-label> -->
       <ion-input color="success" type="number" placeholder="G" [(ngModel)]="g" min="0" max="255" name="g"
         (ionInput)="checkInputLimit($event)"></ion-input>
 
-      <ion-label color="primary" class="margin-left-5">B:</ion-label>
+      <!-- <ion-label color="primary" class="margin-left-5">B:</ion-label> -->
       <ion-input color="primary" type="number" placeholder="B" [(ngModel)]="b" min="0" max="255" name="b"
         (ionInput)="checkInputLimit($event)"></ion-input>
 
-      <ion-label color="medium" class="margin-left-5">A:</ion-label>
+      <!-- <ion-label color="medium" class="margin-left-5">A:</ion-label> -->
       <ion-input color="medium" type="number" placeholder="A" [(ngModel)]="a" min="0" max="1" name="a"
         (ionInput)="checkInputLimit($event)"></ion-input>
     </ion-buttons>
