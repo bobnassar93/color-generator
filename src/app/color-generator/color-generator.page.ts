@@ -57,7 +57,7 @@ export class ColorGeneratorPage implements OnInit {
     });
   }
 
-  checkNumberLimit(ev) {
+  checkInputLimit(ev) {
     const element = ev.target;
     const value = Number(ev.target.value);
 

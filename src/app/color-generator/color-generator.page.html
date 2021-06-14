@@ -9,16 +9,16 @@
     <ion-buttons slot="start">
       <ion-label color="danger">R</ion-label>
       <ion-input color="danger" type="number" placeholder="R" [(ngModel)]="r" min="0" max="255" maxlength="255" name="r"
-        (input)="checkNumberLimit($event)"></ion-input>
+        (input)="checkInputLimit($event)"></ion-input>
         <ion-label color="success">G</ion-label>
       <ion-input color="success" type="number" placeholder="G" [(ngModel)]="g" min="0" max="255" name="g"
-        (ionInput)="checkNumberLimit($event)"></ion-input>
+        (ionInput)="checkInputLimit($event)"></ion-input>
         <ion-label color="primary">B</ion-label>
       <ion-input color="primary" type="number" placeholder="B" [(ngModel)]="b" min="0" max="255" name="b"
-        (ionInput)="checkNumberLimit($event)"></ion-input>
+        (ionInput)="checkInputLimit($event)"></ion-input>
         <ion-label color="medium">A</ion-label>
       <ion-input color="medium" type="number" placeholder="A" [(ngModel)]="a" min="0" max="1" name="a"
-        (ionInput)="checkNumberLimit($event)"></ion-input>
+        (ionInput)="checkInputLimit($event)"></ion-input>
 
       <ion-button fill="clear" color="dark" style="vertical-align: middle;" (click)="copyToClipboard()">
         <ion-icon name="copy-outline"></ion-icon>
@@ -30,7 +30,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" style="--background: rgba({{r}}, {{g}}, {{b}}, {{a}}); opacity: {{a}};">
+<ion-content [fullscreen]="true" style="--background: rgba({{r}}, {{g}}, {{b}}, {{a}});">
 
 </ion-content>
 
