@@ -6,7 +6,8 @@ ion-footer {
 }
 
 ion-input{
-  --padding-end: 10px;
+  --padding-start: 3px;
+  --padding-end: 0;
 }
 
 ion-content{
@@ -14,7 +15,7 @@ ion-content{
 }
 
 ion-toolbar {
-  --padding-start: 10px;
+  --padding-start: 7px;
 }
 
 ion-header {
@@ -58,4 +59,5 @@ ion-range {
 
 ion-buttons {
   font-weight: bold;
+  margin: 0;
 }

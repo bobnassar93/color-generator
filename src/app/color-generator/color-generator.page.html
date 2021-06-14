@@ -5,28 +5,32 @@
     </ion-buttons>
     <ion-title>Color Generator</ion-title>
   </ion-toolbar>
-  <ion-toolbar mode="md">
+  <ion-toolbar style="border-top: solid 1px rgb(0 0 0 / 70%);">
     <ion-buttons slot="start">
-      <ion-label color="danger">R</ion-label>
+      <ion-label color="danger">R:</ion-label>
       <ion-input color="danger" type="number" placeholder="R" [(ngModel)]="r" min="0" max="255" maxlength="255" name="r"
         (input)="checkInputLimit($event)"></ion-input>
-        <ion-label color="success">G</ion-label>
+
+      <ion-label color="success" class="margin-left-5">G:</ion-label>
       <ion-input color="success" type="number" placeholder="G" [(ngModel)]="g" min="0" max="255" name="g"
         (ionInput)="checkInputLimit($event)"></ion-input>
-        <ion-label color="primary">B</ion-label>
+
+      <ion-label color="primary" class="margin-left-5">B:</ion-label>
       <ion-input color="primary" type="number" placeholder="B" [(ngModel)]="b" min="0" max="255" name="b"
         (ionInput)="checkInputLimit($event)"></ion-input>
-        <ion-label color="medium">A</ion-label>
+
+      <ion-label color="medium" class="margin-left-5">A:</ion-label>
       <ion-input color="medium" type="number" placeholder="A" [(ngModel)]="a" min="0" max="1" name="a"
         (ionInput)="checkInputLimit($event)"></ion-input>
-
+    </ion-buttons>
+    <ion-buttons slot="end">
       <ion-button fill="clear" color="dark" style="vertical-align: middle;" (click)="copyToClipboard()">
         <ion-icon name="copy-outline"></ion-icon>
       </ion-button>
+      <ion-button fill="clear" (click)="randomize()" color="dark">
+        <ion-icon name="shuffle-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-button fill="clear" (click)="randomize()" slot="end" color="dark">
-      <ion-icon name="shuffle-outline" ></ion-icon>
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 
