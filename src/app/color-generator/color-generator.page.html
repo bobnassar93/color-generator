@@ -39,7 +39,7 @@
 </ion-content>
 
 <ion-footer id="footer">
-  <ion-button (click)="expandCollapseContainer()" class="expand-collapse-btn">
+  <ion-button (click)="expandCollapseContainer(self)" #self class="expand-collapse-btn">
     <ion-icon slot="icon-only" name="{{icon}}"></ion-icon>
   </ion-button>
   <ion-range min="0" max="255" step="1" color="danger" pin="true" [(ngModel)]="r"></ion-range>

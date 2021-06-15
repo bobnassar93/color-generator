@@ -32,7 +32,7 @@ export class ColorGeneratorPage implements OnInit {
   ngOnInit() {
   }
 
-  expandCollapseContainer() {
+  expandCollapseContainer(self) {
     const footer = document.querySelector('ion-footer');
     const header = document.querySelector('ion-header');
 
@@ -43,11 +43,17 @@ export class ColorGeneratorPage implements OnInit {
       footer.style.height = '0';
       header.style.top = `-${header.clientHeight}px`;
 
+      self.el.classList.add('dimmed');
+      footer.classList.add('dimmed');
+
     } else {
       this.isExpended = true;
       this.icon = 'chevron-down';
       footer.style.height = '178px';
       header.style.top = '0';
+
+      footer.classList.remove('dimmed');
+      self.el.classList.remove('dimmed');
     }
   }
 
