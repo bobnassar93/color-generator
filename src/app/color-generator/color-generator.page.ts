@@ -11,6 +11,7 @@ export class ColorGeneratorPage implements OnInit {
   r = Math.floor(Math.random() * 256);
   g = Math.floor(Math.random() * 256);
   b = Math.floor(Math.random() * 256);
+  hex = '';
   a = 1;
   icon = 'chevron-down';
   isExpended = true;
@@ -18,18 +19,19 @@ export class ColorGeneratorPage implements OnInit {
   constructor(public toastController: ToastController) {
   }
 
-  async presentToast() {
+  async presentToast(message) {
     const toast = await this.toastController.create({
-      message: 'Color code copied to clipboard!',
-      duration: 2000,
+      message,
+      duration: 2500,
       animated: true,
-      position: 'top',
-      color: 'dark'
+      position: 'middle',
+      translucent: true
     });
     toast.present();
   }
 
   ngOnInit() {
+    this.hex = this.rgbaToHex();
   }
 
   expandCollapseContainer(self) {
@@ -57,10 +59,8 @@ export class ColorGeneratorPage implements OnInit {
     }
   }
 
-  async copyToClipboard(): Promise<void> {
-    await navigator.clipboard.writeText(`rgba(${this.r},${this.g},${this.b}, ${this.a})`).then(() => {
-      this.presentToast();
-    });
+  copyToClipboard() {
+    this.copy(`rgba(${this.r},${this.g},${this.b}, ${this.a})`, '(R, G, B, A) copied to clipboard!');
   }
 
   checkInputLimit(ev) {
@@ -105,5 +105,41 @@ export class ColorGeneratorPage implements OnInit {
     this.r = Math.floor(Math.random() * 256);
     this.g = Math.floor(Math.random() * 256);
     this.b = Math.floor(Math.random() * 256);
+  }
+
+  ionRangeChange(){
+    this.hex = this.rgbaToHex();
+  }
+
+  rgbaToHex() {
+    let hexR = this.r.toString(16);
+    let hexG = this.g.toString(16);
+    let hexB = this.b.toString(16);
+    let hexA = Math.round(this.a * 255).toString(16);
+
+    if (hexR.length === 1) {
+      hexR = '0' + hexR;
+    }
+    if (hexG.length === 1) {
+      hexG = '0' + hexG;
+    }
+    if (hexB.length === 1) {
+      hexB = '0' + hexB;
+    }
+    if (hexA.length === 1) {
+      hexA = '0' + hexA;
+    }
+
+    return '#' + hexR + hexG + hexB + hexA;
+  }
+
+  copyHex() {
+    this.copy(this.rgbaToHex(), '#HEX copied to clipboard!');
+  }
+
+  async copy(whatToCopy: string, message: string) {
+    await navigator.clipboard.writeText(whatToCopy).then(() => {
+      this.presentToast(message);
+    });
   }
 }
