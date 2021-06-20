@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, Platform, PopoverController, ToastController } from '@ionic/angular';
+import { InfoComponent } from './info/info.component';
 
 @Component({
   selector: 'app-color-generator',
@@ -34,11 +35,18 @@ export class ColorGeneratorPage implements OnInit {
 
     await alert.present();
 
-    await alert.onDidDismiss().then(() =>{
-      if(this.isDesktop === true){
+    await alert.onDidDismiss().then(() => {
+      if (this.isDesktop === true) {
         if ((localStorage.firstTime === 'false') || (localStorage.firstTime === undefined)) {
           localStorage.firstTime = 'true';
-         // this.presentPopover();
+
+          //const popOverArrow = document.querySelector('.popover-arrow') as HTMLElement;
+          //const popOverContent = document.querySelector('.popover-content') as HTMLElement;
+          //const ionInfoIcon = document.querySelector('#info');
+          //popOverArrow.style.display = 'block !important';
+          //popOverContent.style.display = 'block !important';
+          //this.presentPopover();
+
         }
       }
     });;
@@ -46,10 +54,12 @@ export class ColorGeneratorPage implements OnInit {
 
   async presentPopover() {
     const popover = await this.popoverController.create({
-      component: 'To view shortcuts, press on the info icon',
-      translucent: true,
-      animated: true
+      component: InfoComponent,
+      translucent: false,
+      animated: true,
+      mode: 'ios'
     });
+
     await popover.present();
   }
 
