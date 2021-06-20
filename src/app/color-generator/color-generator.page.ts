@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, Platform, ToastController } from '@ionic/angular';
+import { AlertController, Platform, PopoverController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-color-generator',
@@ -17,7 +17,8 @@ export class ColorGeneratorPage implements OnInit {
   isExpended = true;
   isDesktop = false;
 
-  constructor(public toastController: ToastController, public alertController: AlertController, public platform: Platform) {
+  constructor(public toastController: ToastController, public alertController: AlertController,
+    public platform: Platform, public popoverController: PopoverController) {
   }
 
   async presentAlert() {
@@ -33,7 +34,23 @@ export class ColorGeneratorPage implements OnInit {
 
     await alert.present();
 
-    const { role } = await alert.onDidDismiss();
+    await alert.onDidDismiss().then(() =>{
+      if(this.isDesktop === true){
+        if ((localStorage.firstTime === 'false') || (localStorage.firstTime === undefined)) {
+          localStorage.firstTime = 'true';
+         // this.presentPopover();
+        }
+      }
+    });;
+  }
+
+  async presentPopover() {
+    const popover = await this.popoverController.create({
+      component: 'To view shortcuts, press on the info icon',
+      translucent: true,
+      animated: true
+    });
+    await popover.present();
   }
 
   async presentToast(message) {
@@ -68,7 +85,6 @@ export class ColorGeneratorPage implements OnInit {
       if (e === 'desktop') {
         this.isDesktop = true;
         if ((localStorage.firstTime === 'false') || (localStorage.firstTime === undefined)) {
-          localStorage.firstTime = 'true';
           this.presentAlert();
         }
       }
