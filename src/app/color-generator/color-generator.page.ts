@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { AlertController, Platform, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-color-generator',
@@ -15,11 +15,29 @@ export class ColorGeneratorPage implements OnInit {
   a = 1;
   icon = 'chevron-down';
   isExpended = true;
+  isDesktop = false;
 
-  constructor(public toastController: ToastController) {
+  constructor(public toastController: ToastController, public alertController: AlertController, public platform: Platform) {
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Shortcuts',
+      message: `
+      <p class='ion-text-left'>Use <kbd class='shortcut shortcut-1'>CTRL + S</kbd> To Shuffle Colors</p>
+      <p class='ion-text-left'>Use <kbd class='shortcut shortcut-2'>CTRL + C</kbd> To Copy RGB Code</p>
+      <p class='ion-text-left'>Use <kbd class='shortcut shortcut-3'>CTRL + X</kbd> To Copy HEX Code</p>
+      `,
+      buttons: ['Got it!']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
   }
 
   async presentToast(message) {
+
     const toast = await this.toastController.create({
       message,
       duration: 2500,
@@ -27,11 +45,34 @@ export class ColorGeneratorPage implements OnInit {
       position: 'middle',
       translucent: true
     });
+
     toast.present();
   }
 
   ngOnInit() {
     this.hex = this.rgbaToHex();
+
+    document.addEventListener('keydown', (ev: KeyboardEvent) => {
+
+      if ((ev.ctrlKey === true) && (ev.key.toLowerCase() === 's')) {
+        this.randomize();
+        ev.preventDefault();
+      } else if ((ev.ctrlKey === true) && (ev.key.toLowerCase() === 'c')) {
+        this.copyRGB();
+      } else if ((ev.ctrlKey === true) && (ev.key.toLowerCase() === 'x')) {
+        this.copyHex();
+      }
+    });
+
+    this.platform.platforms().map((e) => {
+      if (e === 'desktop') {
+        this.isDesktop = true;
+        if ((localStorage.firstTime === 'false') || (localStorage.firstTime === undefined)) {
+          localStorage.firstTime = 'true';
+          this.presentAlert();
+        }
+      }
+    });
   }
 
   expandCollapseContainer(self) {
@@ -59,7 +100,7 @@ export class ColorGeneratorPage implements OnInit {
     }
   }
 
-  copyToClipboard() {
+  copyRGB() {
     this.copy(`rgba(${this.r},${this.g},${this.b}, ${this.a})`, '(R, G, B, A) copied to clipboard!');
   }
 
@@ -107,7 +148,7 @@ export class ColorGeneratorPage implements OnInit {
     this.b = Math.floor(Math.random() * 256);
   }
 
-  ionRangeChange(){
+  ionRangeChange() {
     this.hex = this.rgbaToHex();
   }
 

@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -25,6 +25,43 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-.margin-left-5{
-    margin-left: 5px;
+.margin-left-5 {
+  margin-left: 5px;
+}
+
+.shortcut {
+  color: white;
+  padding: 5px 7px;
+  border-radius: 5px;
+}
+
+.shortcut-1 {
+  background: var(--ion-color-danger-shade);
+}
+
+.shortcut-2 {
+  background: var(--ion-color-warning-shade);
+}
+
+.shortcut-3 {
+  background: var(--ion-color-success-shade);
+}
+
+ion-alert {
+  --min-width: max-content !important;
+  --min-width: fit-content !important;
+  p {
+    margin: 20px 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .shortcut {
+    color: var(--ion-color-dark);
+    text-shadow: black 0px 1px 2px;
+  }
+}
+
+.pointer{
+    cursor: pointer;
 }

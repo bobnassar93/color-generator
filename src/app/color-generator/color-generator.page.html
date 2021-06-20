@@ -6,9 +6,11 @@
     <ion-button (click)="copyHex()" fill="clear" color="dark" slot="end">
       {{this.hex}}
     </ion-button>
-    <ion-title>Color Generator</ion-title>
-  </ion-toolbar>
-  <ion-toolbar style="border-top: solid 1px rgb(0 0 0 / 70%);">
+    <ion-title>Color Generator 
+      <ion-icon name="information-circle-outline" class="pointer" style="vertical-align: middle;" *ngIf="isDesktop" (click)="presentAlert()"></ion-icon>
+    </ion-title>
+    </ion-toolbar>
+    <ion-toolbar style="border-top: solid 1px rgb(0 0 0 / 70%);">
     <ion-buttons slot="start">
 
       <ion-input color="danger" type="number" placeholder="R" [(ngModel)]="r" min="0" max="255" maxlength="255" name="r" (ionInput)="checkInputLimit($event)"></ion-input>
@@ -22,7 +24,7 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button fill="clear" color="dark" style="vertical-align: middle;" (click)="copyToClipboard()">
+      <ion-button fill="clear" color="dark" style="vertical-align: middle;" (click)="copyRGB()">
         <ion-icon ios="copy" md="copy-sharp"></ion-icon>
       </ion-button>
       <ion-button fill="clear" (click)="randomize()" color="dark">

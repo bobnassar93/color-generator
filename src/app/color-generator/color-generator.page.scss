@@ -2,6 +2,9 @@ ion-footer {
   height: 178px;
   padding-top: 10px;
   background: #f4f5f8;
+  -webkit-transition: ease-out 0.5s;
+  -moz-transition: ease-out 0.5s;
+  -o-transition: ease-out 0.5s;
   transition: ease-out 0.5s;
 }
 
@@ -18,7 +21,6 @@ ion-input {
 ion-content {
   transition: ease-out 0.5s;
 }
-
 
 ion-header {
   top: 0;
@@ -50,10 +52,10 @@ ion-header {
   --background: rgb(31 31 31 / 40%);
   background: rgb(31 31 31 / 40%);
 
-  ion-icon{
+  ion-icon {
     color: #f4f5f8;
   }
-  ion-button{
+  ion-button {
     background: none;
   }
 }
@@ -68,7 +70,7 @@ ion-header {
     color: #f4f5f8;
   }
 
-  .dimmed{
+  .dimmed {
     --background: rgb(31 31 31 / 40%);
     background: rgb(31 31 31 / 40%);
   }
@@ -94,3 +96,4 @@ ion-buttons {
     margin: 5px 0 5px 0;
   }
 }
+
