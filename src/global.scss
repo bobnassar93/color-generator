@@ -47,9 +47,21 @@
   background: var(--ion-color-primary-shade);
 }
 
+.shortcut-4 {
+  background: white;
+  border: solid 1px var(--ion-color-dark);
+  color: black !important;
+}
+
+.shortcut-5{
+  background: var(--ion-color-warning);
+  color: black !important;
+}
+
 ion-alert {
   --min-width: max-content !important;
   --min-width: fit-content !important;
+
   p {
     margin: 20px 0;
   }
@@ -59,6 +71,15 @@ ion-alert {
   .shortcut {
     color: var(--ion-color-dark);
     text-shadow: black 0px 1px 2px;
+  }
+
+  .shortcut-4 {
+    text-shadow: none;
+  }
+
+  .shortcut-5{
+    color: black;
+    text-shadow: none !important;
   }
 }
 

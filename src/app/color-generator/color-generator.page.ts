@@ -17,6 +17,7 @@ export class ColorGeneratorPage implements OnInit {
   icon = 'chevron-down';
   isExpended = true;
   isDesktop = false;
+  previousColors = [];
 
   constructor(public toastController: ToastController, public alertController: AlertController,
     public platform: Platform, public popoverController: PopoverController) {
@@ -29,6 +30,7 @@ export class ColorGeneratorPage implements OnInit {
       <p class='ion-text-left'>Use <kbd class='shortcut shortcut-1'>CTRL + S</kbd> To Shuffle Colors</p>
       <p class='ion-text-left'>Use <kbd class='shortcut shortcut-2'>CTRL + C</kbd> To Copy RGB Code</p>
       <p class='ion-text-left'>Use <kbd class='shortcut shortcut-3'>CTRL + X</kbd> To Copy HEX Code</p>
+      <p class='ion-text-left'>Use <kbd class='shortcut shortcut-4'>CTRL + Z</kbd> To Undo Color</p>
       `,
       buttons: ['Got it!']
     });
@@ -88,6 +90,8 @@ export class ColorGeneratorPage implements OnInit {
         this.copyRGB();
       } else if ((ev.ctrlKey === true) && (ev.key.toLowerCase() === 'x')) {
         this.copyHex();
+      } else if ((ev.ctrlKey === true) && (ev.key.toLowerCase() === 'z')) {
+        this.undo();
       }
     });
 
@@ -169,6 +173,8 @@ export class ColorGeneratorPage implements OnInit {
   }
 
   randomize() {
+    this.setpreviousColor();
+
     this.r = Math.floor(Math.random() * 256);
     this.g = Math.floor(Math.random() * 256);
     this.b = Math.floor(Math.random() * 256);
@@ -208,5 +214,36 @@ export class ColorGeneratorPage implements OnInit {
     await navigator.clipboard.writeText(whatToCopy).then(() => {
       this.presentToast(message);
     });
+  }
+
+  undo() {
+
+    if (this.previousColors.length > 0) {
+      this.r = this.extractRGB('r', this.previousColors[this.previousColors.length - 1]);
+      this.g = this.extractRGB('g', this.previousColors[this.previousColors.length - 1]);
+      this.b = this.extractRGB('b', this.previousColors[this.previousColors.length - 1]);
+      this.a = this.extractRGB('a', this.previousColors[this.previousColors.length - 1]);
+
+      this.hex = this.rgbaToHex();
+
+      this.previousColors.pop();
+    }
+  }
+
+  extractRGB(color, from) {
+    switch (color) {
+      case 'r':
+        return Number(from.replace('rgba', '').replace('(', '').replace(')', '').split(',')[0].trim());
+      case 'g':
+        return Number(from.replace('rgba', '').replace('(', '').replace(')', '').split(',')[1].trim());
+      case 'b':
+        return Number(from.replace('rgba', '').replace('(', '').replace(')', '').split(',')[2].trim());
+      case 'a':
+        return Number(from.replace('rgba', '').replace('(', '').replace(')', '').split(',')[3].trim());
+    }
+  }
+
+  setpreviousColor() {
+    this.previousColors.push(`rgba(${this.r},${this.g},${this.b}, ${this.a})`);
   }
 }
