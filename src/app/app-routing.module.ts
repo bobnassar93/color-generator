@@ -10,7 +10,11 @@ const routes: Routes = [
   {
     path: 'color-generator',
     loadChildren: () => import('./color-generator/color-generator.module').then( m => m.ColorGeneratorPageModule)
+  },  {
+    path: 'shadow-box',
+    loadChildren: () => import('./shadow-box/shadow-box.module').then( m => m.ShadowBoxPageModule)
   }
+
 ];
 
 @NgModule({

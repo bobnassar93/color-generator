@@ -78,7 +78,9 @@ export class ColorGeneratorPage implements OnInit {
     toast.present();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    document.body.classList.toggle('dark', true);
+
     this.hex = this.rgbaToHex();
 
     document.addEventListener('keydown', (ev: KeyboardEvent) => {

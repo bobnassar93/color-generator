@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Shadow Box</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-item lines="none" detail="false">
+        <ion-label>Theme</ion-label>
+        <ion-toggle #self (ionChange)="toggleMode(self)"></ion-toggle>
+      </ion-item>
+    </ion-buttons>
+    <ion-item slot="end" lines="none" detail="false">
+      <ion-select value="btn" interface="popover" #self (ionChange)="onComponentChange(self)">
+        <ion-select-option value="btn">Button</ion-select-option>
+        <ion-select-option value="div">Div</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" >
+  <div class="ion-text-center full-width ion-padding-horizontal ion-padding-vertical">
+    <app-button *ngIf="component === 'btn'" [text]="text" [style]="style" [size]="size" [radius]="radius + 'px'" class="transition"></app-button>
+  </div>
+
+  <app-div *ngIf="component === 'div'"></app-div>
+
+  <ng-container *ngIf="component === 'btn'">
+    <ion-item lines="none" detail="false">
+      <ion-label position="stacked">Button text</ion-label>
+      <ion-input placeholder="Button Text" [(ngModel)]="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-range min="0" max="50" [(ngModel)]="radius" color="secondary" pin="true"></ion-range>
+    </ion-item>
+
+    <ion-radio-group value="default" #self (ionChange)="changeBtnSize(self)">
+      <ion-list-header>
+        <ion-label>Size</ion-label>
+      </ion-list-header>
+  
+      <ion-item>
+        <ion-label>Small</ion-label>
+        <ion-radio slot="start" value="small" color="warning"></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Default</ion-label>
+        <ion-radio slot="start" value="default" color="tertiary"></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Large</ion-label>
+        <ion-radio slot="start" value="large" color="danger"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ng-container>
+  
+</ion-content>

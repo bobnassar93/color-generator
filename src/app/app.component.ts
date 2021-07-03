@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Color Generator', url: '/color-generator/', icon: 'color-palette' }
+    { title: 'Color Generator', url: '/color-generator/', icon: 'color-palette' },
+    { title: 'Shadow Box', url: '/shadow-box/', icon: 'prism' }
   ];
   constructor() {}
 }
