@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-div',
@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DivComponent implements OnInit {
 
+  @Input() boxShadow!: string;
+  @Input() text!: string;
+  @Input() padding!: number;
+  @Input() radius!: number;
   constructor() { }
 
   ngOnInit() {}

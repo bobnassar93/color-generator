@@ -7,13 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ButtonComponent implements OnInit {
 
-  @Input() text = 'Click';
-  @Input() style = '';
-  @Input() class = '';
-  @Input() color = '';
-  @Input() size = '';
-  @Input() radius = '';
-  @Input() boxShadow = '';
+  @Input() text!: string;
+  @Input() style!: string;
+  @Input() class!: string;
+  @Input() color!: string;
+  @Input() size!: string;
+  @Input() radius!: string;
+  @Input() boxShadow!: string;
   constructor() { }
 
   ngOnInit(): void {}

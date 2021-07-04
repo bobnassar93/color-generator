@@ -25,7 +25,7 @@ export class ShadowBoxPage implements OnInit {
   background = true;
   //#endregion
 
-  //#region Button Input Properties
+  //#region Button Input() Properties
   component = 'btn';
   text = 'Click me';
   style = '';
@@ -33,6 +33,11 @@ export class ShadowBoxPage implements OnInit {
   color = 'dark';
   size = 'default';
   radius = 30;
+  //#endregion
+
+  //#region DIV Input() properties
+  divText = 'Hello There Friend';
+  padding = 30;
   //#endregion
 
   //#region Shadow Box
