@@ -13,6 +13,7 @@ export class ButtonComponent implements OnInit {
   @Input() color = '';
   @Input() size = '';
   @Input() radius = '';
+  @Input() boxShadow = '';
   constructor() { }
 
   ngOnInit(): void {}

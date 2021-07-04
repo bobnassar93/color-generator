@@ -7,11 +7,11 @@
     <ion-buttons slot="primary">
       <ion-item lines="none" detail="false">
         <ion-label>Theme</ion-label>
-        <ion-toggle #self (ionChange)="toggleMode(self)"></ion-toggle>
+        <ion-toggle #selfToggle (ionChange)="toggleMode(selfToggle)"></ion-toggle>
       </ion-item>
     </ion-buttons>
     <ion-item slot="end" lines="none" detail="false">
-      <ion-select value="btn" interface="popover" #self (ionChange)="onComponentChange(self)">
+      <ion-select value="btn" interface="popover" #selfSelect (ionChange)="onComponentChange(selfSelect)">
         <ion-select-option value="btn">Button</ion-select-option>
         <ion-select-option value="div">Div</ion-select-option>
       </ion-select>
@@ -19,43 +19,127 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" >
-  <div class="ion-text-center full-width ion-padding-horizontal ion-padding-vertical">
-    <app-button *ngIf="component === 'btn'" [text]="text" [style]="style" [size]="size" [radius]="radius + 'px'" class="transition"></app-button>
+<ion-content [fullscreen]="true" slot="fixed">
+  <div class="flex ion-text-center full-width full-height ion-justify-content-center ion-align-items-center">
+    <app-button *ngIf="component === 'btn'" [text]="text" [size]="size" [radius]="radius + 'px'" [color]="color"
+      [boxShadow]="boxShadowString" (click)="cycleBtnColor()"></app-button>
   </div>
-
-  <app-div *ngIf="component === 'div'"></app-div>
-
-  <ng-container *ngIf="component === 'btn'">
-    <ion-item lines="none" detail="false">
-      <ion-label position="stacked">Button text</ion-label>
-      <ion-input placeholder="Button Text" [(ngModel)]="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-range min="0" max="50" [(ngModel)]="radius" color="secondary" pin="true"></ion-range>
-    </ion-item>
-
-    <ion-radio-group value="default" #self (ionChange)="changeBtnSize(self)">
-      <ion-list-header>
-        <ion-label>Size</ion-label>
-      </ion-list-header>
-  
-      <ion-item>
-        <ion-label>Small</ion-label>
-        <ion-radio slot="start" value="small" color="warning"></ion-radio>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label>Default</ion-label>
-        <ion-radio slot="start" value="default" color="tertiary"></ion-radio>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label>Large</ion-label>
-        <ion-radio slot="start" value="large" color="danger"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ng-container>
-  
 </ion-content>
+<ion-footer>
+  <ion-list>
+    <ng-container *ngIf="component === 'div'">
+      <app-div></app-div>
+    </ng-container>
+
+    <ion-list-header>
+      <ion-label>
+        <h1>Text</h1>
+      </ion-label>
+    </ion-list-header>
+    <ion-item lines="none" detail="false">
+      <ion-input type="text" placeholder="Button Text" [(ngModel)]="text" style="border-bottom: solid 1px #9c9c9c;">
+      </ion-input>
+    </ion-item>
+    <ng-container *ngIf="component === 'btn'">
+      <ion-item lines="none" detail="false">
+        <ion-label>Radius</ion-label>
+        <ion-range min="0" max="50" [(ngModel)]="radius" pin="true" snaps="true"></ion-range>
+      </ion-item>
+
+      <ion-list-header>
+        <ion-label>
+          <h1>Button Size</h1>
+        </ion-label>
+      </ion-list-header>
+      <ion-buttons class="ion-padding-start">
+        <ion-button size="small" fill="outline" color="warning" (click)="changeBtnSize('small')">
+          Small
+        </ion-button>
+        <ion-button size="default" fill="outline" color="tertiary" (click)="changeBtnSize('default')">
+          Default
+        </ion-button>
+        <ion-button size="large" fill="outline" color="danger" (click)="changeBtnSize('large')">
+          Large
+        </ion-button>
+      </ion-buttons>
+    </ng-container>
+
+    <ion-list-header>
+      <ion-label>
+        <h1>Shadow Box</h1>
+      </ion-label>
+    </ion-list-header>
+    <!-- Inset Shadow -->
+    <ion-item style="width: fit-content;" lines="none">
+      <ion-label>Inset Shadow</ion-label>
+      &nbsp;
+      <ion-checkbox (ionChange)="updateShadowBox()" [(ngModel)]="inset"></ion-checkbox>
+    </ion-item>
+    <!-- End Inset Shadow -->
+
+    <!-- Shadow Color -->
+    <ion-item style="width: fit-content;" lines="none">
+      <ion-label>Shadow Color</ion-label>
+      &nbsp;
+      <input type="color" [(ngModel)]="shadowColor" (ngModelChange)="updateShadowBox()">
+    </ion-item>
+    <!-- End Shadow Color -->
+
+    <!-- Shadow Opacity -->
+    <ion-item lines="none">
+      <ion-label position="stacked">Shadow Opacity</ion-label>
+      <ion-range min="0" max="1" step="0.01" snaps="true" pin="true" [(ngModel)]="shadowOpacity" (ngModelChange)="updateShadowBox()">
+      </ion-range>
+    </ion-item>
+    <!-- End Shadow Opacity -->
+
+    <ion-grid>
+      <ion-row>
+        <!-- Horizontal offset -->
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="4" sizeXl="3">
+          <ion-item detail="false">
+            <ion-label position="stacked">Horizontal offset</ion-label>
+            <ion-range min="-20" max="20" [(ngModel)]="hOffset" pin="true" snaps="true"
+              (ionChange)="updateShadowBox()">
+            </ion-range>
+          </ion-item>
+        </ion-col>
+        <!-- End Horizontal offset -->
+
+        <!-- Vertical offset -->
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="4" sizeXl="3">
+          <ion-item>
+            <ion-label position="stacked">Vertical offset</ion-label>
+            <ion-range min="-20" max="20" [(ngModel)]="vOffset" pin="true" snaps="true"
+              (ionChange)="updateShadowBox()">
+            </ion-range>
+          </ion-item>
+        </ion-col>
+        <!-- End Vertical offset -->
+
+        <!-- Blur -->
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="4" sizeXl="3">
+          <ion-item>
+            <ion-label position="stacked">Blur</ion-label>
+            <ion-range min="0" max="100" [(ngModel)]="blur" pin="true" snaps="true"
+              (ionChange)="updateShadowBox()">
+            </ion-range>
+          </ion-item>
+        </ion-col>
+        <!-- End Blur -->
+
+        <!-- Spread -->
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="4" sizeXl="3">
+          <ion-item>
+            <ion-label position="stacked">Spread</ion-label>
+            <ion-range min="-10" max="100" [(ngModel)]="spread" pin="true" snaps="true"
+              (ionChange)="updateShadowBox()">
+            </ion-range>
+          </ion-item>
+        </ion-col>
+        <!-- End Spread -->
+
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-footer>
