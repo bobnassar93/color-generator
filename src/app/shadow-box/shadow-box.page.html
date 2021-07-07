@@ -33,6 +33,12 @@
     <!-- End DIV -->
   </div>
 </ion-content>
+<ion-item lines="none">
+  <ion-textarea autogrow="true" slot="start" color="primary" type="text" [(ngModel)]="boxShadowString"></ion-textarea>
+  <ion-button fill="clear" slot="start" color="primary" style="vertical-align: middle;" (click)="copyShadowText(boxShadowString)">
+    <ion-icon ios="copy" md="copy-sharp"></ion-icon>
+  </ion-button>
+</ion-item>
 <ion-footer>
   <ion-list>
     <ion-list-header>
@@ -44,19 +50,16 @@
     <ng-container *ngIf="component === 'div'">
       <!-- Div inner text -->
       <ion-item lines="none" detail="false">
-        <ion-input type="text" placeholder="Div Text" [(ngModel)]="divText" style="border-bottom: solid 1px #9c9c9c;">
+        <ion-input color="danger" type="text" placeholder="Div Text" [(ngModel)]="divText" style="border-bottom: solid 1px #9c9c9c;">
         </ion-input>
       </ion-item>
       <!-- End div inner text -->
     </ng-container>
-    <ion-item lines="none" detail="false">
-      <ion-label>Radius</ion-label>
-      <ion-range min="0" max="50" [(ngModel)]="radius" pin="true" snaps="true"></ion-range>
-    </ion-item>
+    
     <ng-container *ngIf="component === 'btn'">
       <!-- Btn inner text -->
       <ion-item lines="none" detail="false">
-        <ion-input type="text" placeholder="Button Text" [(ngModel)]="text" style="border-bottom: solid 1px #9c9c9c;">
+        <ion-input color="danger" type="text" placeholder="Button Text" [(ngModel)]="text" style="border-bottom: solid 1px #9c9c9c;">
         </ion-input>
       </ion-item>
       <!-- End btn inner text -->
@@ -78,7 +81,10 @@
         </ion-button>
       </ion-buttons>
     </ng-container>
-
+    <ion-item lines="none" detail="false">
+      <ion-label>Radius</ion-label>
+      <ion-range min="0" max="50" [(ngModel)]="radius" pin="true" snaps="true"></ion-range>
+    </ion-item>
     <ion-list-header>
       <ion-label>
         <h1>Shadow Box</h1>

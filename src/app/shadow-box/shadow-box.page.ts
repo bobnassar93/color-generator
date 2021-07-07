@@ -1,5 +1,7 @@
+/* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-shadow-box',
@@ -27,7 +29,7 @@ export class ShadowBoxPage implements OnInit {
 
   //#region Button Input() Properties
   component = 'btn';
-  text = 'Click me';
+  text = 'Click me to change my color';
   style = '';
   class = '';
   color = 'dark';
@@ -48,12 +50,10 @@ export class ShadowBoxPage implements OnInit {
   spread = 0;
   shadowColor = '#000000';
   shadowOpacity = 1;
-  boxShadowString = `${this.inset ? 'inset' : ''} 
-  ${this.hOffset}px ${this.vOffset}px ${this.blur}px ${this.spread}px 
-  ${this.shadowColor}${Math.round(this.shadowOpacity * 255).toString(16)}`;
+  boxShadowString = `${this.inset ? 'inset' : ''} ${this.hOffset}px ${this.vOffset}px ${this.blur}px ${this.spread}px ${this.shadowColor}${Math.round(this.shadowOpacity * 255).toString(16)}`;
   //#endregion
 
-  constructor() { }
+  constructor(private cmv: CommonService) { }
 
   ngOnInit(): void {
     document.body.classList.toggle('dark', false);
@@ -71,9 +71,7 @@ export class ShadowBoxPage implements OnInit {
   }
 
   updateShadowBox(): void {
-    this.boxShadowString = `${this.inset ? 'inset' : ''} 
-    ${this.hOffset}px ${this.vOffset}px ${this.blur}px ${this.spread}px 
-    ${this.shadowColor}${Math.round(this.shadowOpacity * 255).toString(16)}`;
+    this.boxShadowString = `${this.inset ? 'inset' : ''} ${this.hOffset}px ${this.vOffset}px ${this.blur}px ${this.spread}px ${this.shadowColor}${Math.round(this.shadowOpacity * 255).toString(16)}`;
   }
 
   cycleBtnColor(): void {
@@ -88,5 +86,9 @@ export class ShadowBoxPage implements OnInit {
     } else {
       return _array[this.index];
     }
+  }
+
+  copyShadowText(text: string): void {
+    this.cmv.copy(text, 'Shadow-box CSS copied successfully');
   }
 }

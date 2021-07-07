@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, Platform, PopoverController, ToastController } from '@ionic/angular';
+import { CommonService } from '../services/common.service';
 import { InfoComponent } from './info/info.component';
 
 @Component({
@@ -19,8 +20,9 @@ export class ColorGeneratorPage implements OnInit {
   isDesktop = false;
   previousColors = [];
 
-  constructor(public toastController: ToastController, public alertController: AlertController,
-    public platform: Platform, public popoverController: PopoverController) {
+  constructor(private alertController: AlertController,
+    private platform: Platform, private popoverController: PopoverController,
+    private cmv: CommonService) {
   }
 
   async presentAlert() {
@@ -63,19 +65,6 @@ export class ColorGeneratorPage implements OnInit {
     });
 
     await popover.present();
-  }
-
-  async presentToast(message) {
-
-    const toast = await this.toastController.create({
-      message,
-      duration: 2500,
-      animated: true,
-      position: 'middle',
-      translucent: true
-    });
-
-    toast.present();
   }
 
   ngOnInit(): void {
@@ -133,7 +122,7 @@ export class ColorGeneratorPage implements OnInit {
   }
 
   copyRGB() {
-    this.copy(`rgba(${this.r},${this.g},${this.b}, ${this.a})`, '(R, G, B, A) copied to clipboard!');
+    this.cmv.copy(`rgba(${this.r},${this.g},${this.b}, ${this.a})`, '(R, G, B, A) copied to clipboard!');
   }
 
   checkInputLimit(ev) {
@@ -209,13 +198,7 @@ export class ColorGeneratorPage implements OnInit {
   }
 
   copyHex() {
-    this.copy(this.rgbaToHex(), '#HEX copied to clipboard!');
-  }
-
-  async copy(whatToCopy: string, message: string) {
-    await navigator.clipboard.writeText(whatToCopy).then(() => {
-      this.presentToast(message);
-    });
+    this.cmv.copy(this.rgbaToHex(), '#HEX copied to clipboard!');
   }
 
   undo() {

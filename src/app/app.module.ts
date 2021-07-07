@@ -8,12 +8,13 @@ import { InfoComponent } from './color-generator/info/info.component';
 import { ButtonComponent } from './shadow-box/button/button.component';
 import { DivComponent } from './shadow-box/div/div.component';
 import { ShadowBoxPageModule } from './shadow-box/shadow-box.module';
+import { CommonService } from './services/common.service';
 
 @NgModule({
   declarations: [AppComponent, InfoComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ShadowBoxPageModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, CommonService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
