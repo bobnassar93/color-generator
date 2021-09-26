@@ -26,6 +26,7 @@ npm-debug.log*
 /coverage
 /dist
 /node_modules
+/color-generator-win32-x64
 /platforms
 /plugins
 /www
