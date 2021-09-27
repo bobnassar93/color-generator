@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, Platform, PopoverController, ToastController } from '@ionic/angular';
+import { AlertController, Platform, PopoverController } from '@ionic/angular';
 import { CommonService } from '../services/common.service';
-import { InfoComponent } from './info/info.component';
 
 @Component({
   selector: 'app-color-generator',
@@ -34,7 +33,8 @@ export class ColorGeneratorPage implements OnInit {
       <p class='ion-text-left'>Use <kbd class='shortcut shortcut-3'>CTRL + X</kbd> To Copy HEX Code</p>
       <p class='ion-text-left'>Use <kbd class='shortcut shortcut-4'>CTRL + Z</kbd> To Undo Color</p>
       `,
-      buttons: ['Got it!']
+      buttons: ['Got it!'],
+      cssClass: 'promptInfo'
     });
 
     await alert.present();
@@ -43,28 +43,9 @@ export class ColorGeneratorPage implements OnInit {
       if (this.isDesktop === true) {
         if ((localStorage.firstTime === 'false') || (localStorage.firstTime === undefined)) {
           localStorage.firstTime = 'true';
-
-          //const popOverArrow = document.querySelector('.popover-arrow') as HTMLElement;
-          //const popOverContent = document.querySelector('.popover-content') as HTMLElement;
-          //const ionInfoIcon = document.querySelector('#info');
-          //popOverArrow.style.display = 'block !important';
-          //popOverContent.style.display = 'block !important';
-          //this.presentPopover();
-
         }
       }
     });;
-  }
-
-  async presentPopover() {
-    const popover = await this.popoverController.create({
-      component: InfoComponent,
-      translucent: false,
-      animated: true,
-      mode: 'ios'
-    });
-
-    await popover.present();
   }
 
   ngOnInit(): void {

@@ -48,3 +48,40 @@
 .flex {
   display: flex;
 }
+
+.promptInfo {
+  .shortcut {
+    color: white;
+    padding: 5px 7px;
+    border-radius: 5px;
+  }
+
+  .shortcut-1 {
+    background: var(--ion-color-danger-shade);
+  }
+
+  .shortcut-2 {
+    background: #118640;
+  }
+
+  .shortcut-3 {
+    background: var(--ion-color-primary-shade);
+  }
+
+  .shortcut-4 {
+    background: white;
+    border: solid 1px var(--ion-color-dark);
+    color: black !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .shortcut {
+      color: var(--ion-color-dark);
+      text-shadow: black 0px 1px 2px;
+    }
+
+    .shortcut-4 {
+      text-shadow: none;
+    }
+  }
+}

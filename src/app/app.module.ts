@@ -4,17 +4,16 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { InfoComponent } from './color-generator/info/info.component';
-import { ButtonComponent } from './shadow-box/button/button.component';
-import { DivComponent } from './shadow-box/div/div.component';
 import { ShadowBoxPageModule } from './shadow-box/shadow-box.module';
 import { CommonService } from './services/common.service';
 
 @NgModule({
-  declarations: [AppComponent, InfoComponent],
+  declarations: [
+    AppComponent
+  ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ShadowBoxPageModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, CommonService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
