@@ -12,7 +12,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "electron .",
-    "electron-build": "ng build --configuration=production"
+    "electron-build": "ionic build --configuration=production"
   },
   "private": true,
   "dependencies": {
